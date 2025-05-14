@@ -24,7 +24,8 @@ public class UserController {
         return userService.updateUser(user, userId);
     }
 
-    @GetMapping("/delete/{userId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/admin/delete/{userId}")
     public String deleteUserStatus(@PathVariable Long userId) {
         return userService.deleteUser(userId);
     }
