@@ -24,8 +24,8 @@ public class Beans {
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("example_route", r -> r.path("/example/**")
-                        .uri("http://localhost:8081")
+                .route("example_route", r -> r.path("/api/**")
+                        .uri("http://localhost:3000")
                 )
                 .build();
     }
