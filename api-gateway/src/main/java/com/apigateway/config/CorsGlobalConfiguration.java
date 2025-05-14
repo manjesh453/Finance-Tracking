@@ -2,26 +2,31 @@ package com.apigateway.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.reactive.CorsWebFilter;
-import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
-
-import java.util.Arrays;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class CorsGlobalConfiguration {
 
+    private static final String GET = "GET";
+    private static final String POST = "POST";
+    private static final String DELETE = "DELETE";
+    private static final String PUT = "PUT";
+
     @Bean
-    public CorsWebFilter corsWebFilter() {
-        CorsConfiguration corsConfig = new CorsConfiguration();
-        corsConfig.setAllowCredentials(true); // Allow cookies
-        corsConfig.setAllowedOrigins(Arrays.asList("*")); // Allow all origins (change for production)
-        corsConfig.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        corsConfig.setAllowedHeaders(Arrays.asList("*")); // Allow all headers
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", corsConfig);
-
-        return new CorsWebFilter(source);
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                WebMvcConfigurer.super.addCorsMappings(registry);
+                registry.addMapping("/**")
+                        .allowedMethods(GET, POST, PUT, DELETE)
+                        .allowedOrigins("http://localhost:3000")
+                        .allowedHeaders("*")
+                        .allowedOriginPatterns("*")
+                        .allowCredentials(true)
+                ;
+            }
+        };
     }
 }
