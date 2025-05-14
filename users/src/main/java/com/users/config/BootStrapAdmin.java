@@ -1,6 +1,8 @@
 package com.users.config;
 
+import com.users.entity.Account;
 import com.users.entity.Users;
+import com.users.repo.AccountRepo;
 import com.users.repo.UserRepo;
 import com.users.shared.Role;
 import com.users.shared.Status;
@@ -16,6 +18,7 @@ import java.util.Date;
 public class BootStrapAdmin implements CommandLineRunner {
     private final UserRepo userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final AccountRepo accountRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -31,8 +34,10 @@ public class BootStrapAdmin implements CommandLineRunner {
                     .status(Status.ACTIVE)
                     .contactNumber("9999999999")
                     .build();
-
             userRepository.save(user);
+            Account account = new Account();
+            account.setUsers(user);
+            accountRepository.save(account);
         }
     }
 }
