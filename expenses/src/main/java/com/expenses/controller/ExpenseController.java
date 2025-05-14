@@ -31,9 +31,9 @@ public class ExpenseController {
         return expensesService.deleteExpense(expensesId);
     }
 
-    @GetMapping("/getAllExpenses/{receiverId}")
-    public List<ExpenseDto> getAllExpenses(@PathVariable Long receiverId) {
-        return expensesService.getAllExpensesByReceiverId( receiverId);
+    @GetMapping("/getAllExpenses/{userId}")
+    public List<ExpenseDto> getAllExpenses(@PathVariable Long userId) {
+        return expensesService.getAllExpensesByReceiverId( userId);
     }
 
     @PostMapping("/filterByDate")
@@ -41,14 +41,14 @@ public class ExpenseController {
         return expensesService.filterExpensesByDate(dateDto.getStartDate(), dateDto.getEndDate(), dateDto.getSenderId());
     }
 
-    @PostMapping("/getByCategory/{senderId}")
-    public List<ExpenseDto> filterExpensesByCategory(@RequestBody ExpenseCategory category, @PathVariable Long senderId) {
-        return expensesService.filterExpensesByCategory(category, senderId);
+    @PostMapping("/getByCategory/{userId}")
+    public List<ExpenseDto> filterExpensesByCategory(@RequestBody ExpenseCategory category, @PathVariable Long userId) {
+        return expensesService.filterExpensesByCategory(category, userId);
     }
 
-    @GetMapping("/getByRecentExpenses/{senderId}")
-    public List<ExpenseDto> getByRecentExpenses(@PathVariable Long senderId) {
-        return expensesService.getRecentExpensesHistory(senderId);
+    @GetMapping("/getByRecentExpenses/{userId}")
+    public List<ExpenseDto> getByRecentExpenses(@PathVariable Long userId) {
+        return expensesService.getRecentExpensesHistory(userId);
     }
     @GetMapping("/test")
     public String testMe(){
