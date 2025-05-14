@@ -21,14 +21,6 @@ public class Beans {
                         .version("1.0.0"));
     }
 
-    @Bean
-    public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
-        return builder.routes()
-                .route("example_route", r -> r.path("/api/**")
-                        .uri("http://localhost:3000")
-                )
-                .build();
-    }
 
     @Bean
     public GlobalCorsProperties globalCorsProperties() {
