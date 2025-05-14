@@ -21,9 +21,4 @@ public class Beans {
                         .version("1.0.0"));
     }
 
-
-    @Bean
-    public GlobalCorsProperties globalCorsProperties() {
-        return new GlobalCorsProperties();
-    }
 }
