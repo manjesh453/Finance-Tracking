@@ -31,14 +31,14 @@ public class IncomeController {
         return incomeService.deleteIncome(incomeId);
     }
 
-    @GetMapping("/getAllIncome/{receiverId}")
-    public List<IncomeDto> getAllIncome(@PathVariable Long receiverId) {
-        return incomeService.getAllIncome(receiverId);
+    @GetMapping("/getAllIncome/{userId}")
+    public List<IncomeDto> getAllIncome(@PathVariable Long userId) {
+        return incomeService.getAllIncome(userId);
     }
 
-    @GetMapping("/getRecentIncomeHistory/{receiverId}")
-    public List<IncomeDto> getRecentIncomeHistory(@PathVariable Long receiverId) {
-        return incomeService.getRecentIncomeHistory(receiverId);
+    @GetMapping("/getRecentIncomeHistory/{userId}")
+    public List<IncomeDto> getRecentIncomeHistory(@PathVariable Long userId) {
+        return incomeService.getRecentIncomeHistory(userId);
     }
 
     @PostMapping("/getByDate")
@@ -46,9 +46,9 @@ public class IncomeController {
         return incomeService.getIncomeByDate(dateDto.getStartDate(), dateDto.getEndDate(), dateDto.getReceiverId());
     }
 
-    @PostMapping("/getByReceiverIdAndStatus/{receiverId}")
-    public List<IncomeDto> getIncomeByReceiverId(@PathVariable Long receiverId, @RequestBody String status) {
-        return incomeService.getByReceiverId(receiverId, Status.valueOf(status));
+    @PostMapping("/getByReceiverIdAndStatus/{userId}")
+    public List<IncomeDto> getIncomeByReceiverId(@PathVariable Long userId, @RequestBody String status) {
+        return incomeService.getByReceiverId(userId, Status.valueOf(status));
     }
 
     @GetMapping("/test")
